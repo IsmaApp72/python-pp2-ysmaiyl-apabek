@@ -1,3 +1,3 @@
-def my_function():
+def myfunction():
     global x
     x = "fantastic"
