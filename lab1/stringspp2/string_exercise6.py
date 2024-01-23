@@ -1,3 +1,3 @@
 txt = "Hello World"
 txt = txt.lower()
-print(txt)
+print(txt) #output:hello world
