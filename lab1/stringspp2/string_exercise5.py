@@ -1,3 +1,3 @@
 txt = "Hello World"
 txt = txt.upper()
-print(txt)
+print(txt) #output:HELLO WORLD
