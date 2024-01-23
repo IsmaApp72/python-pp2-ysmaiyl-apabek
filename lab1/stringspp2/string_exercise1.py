@@ -1,2 +1,2 @@
 x = "Hello World"
-print(len(x))
+print(len(x)) #output:11
