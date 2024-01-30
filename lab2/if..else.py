@@ -45,7 +45,7 @@ if 5 > 2:
 a = 2
 b = 5
 print("YES") if a > b else print("NO") #output:NO
-#task8
+#task9
 a = 2
 b = 50
 c = 2
