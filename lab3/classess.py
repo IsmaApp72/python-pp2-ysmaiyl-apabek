@@ -90,8 +90,6 @@ def is_prime(n):
         if n % i == 0:
             return False
     return True
-
-
 prime_numbers_filter = lambda numbers: list(filter(is_prime, numbers))
 numbers = [10, 15, 3, 7, 29, 42]
 print(prime_numbers_filter(numbers))

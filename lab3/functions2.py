@@ -61,3 +61,9 @@ avg_imdb = average_imdb_score(movies)
 avg_imdb_romance = average_imdb_score_by_category(movies, category)
 
 (is_movie_highly_rated, highly_rated_movies, movies_in_category, avg_imdb, avg_imdb_romance)
+print(is_highly_rated(test_movie))
+print(get_highly_rated_movies(movies))
+print(get_movies_by_category(movies, category))
+print(average_imdb_score(movies))
+print(average_imdb_score_by_category(movies, category))
+
