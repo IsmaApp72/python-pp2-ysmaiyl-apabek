@@ -1,5 +1,3 @@
-# Define the functions as per the tasks described in the uploaded image
-
 # Task 1: Matches a string that has an 'a' followed by zero or more 'b's
 def task1(text):
     return bool(re.match(r'ab*', text))
@@ -40,7 +38,6 @@ def task9(text):
 def task10(text):
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', text).lower()
 
-# Now we will create a function that will print out the results of each task
 def print_regex_exercises():
     print("Task 1:", task1("ab"))
     print("Task 2:", task2("abb"))
