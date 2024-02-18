@@ -1,9 +1,9 @@
 #task 1
-print(10>9) #outpit:True
+print(10 > 9) #outpit:True
 #task 2
-print(10==9) #output:False
+print(10 == 9) #output:False
 #task 3
-print(10<9) #output:False
+print(10 < 9) #output:False
 #task 4
 print(bool("abc")) #output:True
 #task 5
