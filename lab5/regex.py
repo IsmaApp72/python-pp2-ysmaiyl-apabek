@@ -1,4 +1,5 @@
 # Task 1: Matches a string that has an 'a' followed by zero or more 'b's
+import re
 def task1(text):
     return bool(re.match(r'ab*', text))
 
