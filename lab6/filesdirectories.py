@@ -1,53 +1,65 @@
 import os
 from string import ascii_uppercase
-#task 1
-location1 = r'C:\'
-print([name for name in os.listdir(location1)]) #everything
-print([name for name in os.listdir(location1) if os.path.isdir(os.path.join(location1, name))]) # only directories
-print([name for name in os.listdir(location1) if not os.path.isdir(os.path.join(location1, name))]) # only files
 
-#task 2
-print('Path exists:', os.access(r'C:\', os.F_OK))
-print('Path readable:', os.access(r'C:\', os.R_OK))
-print('Path writable:', os.access(r'C:\', os.W_OK))
-print('Path executable:', os.access(r'C:\', os.X_OK))
+# Task 1: List only directories, files, and all directories, files in a specified path.
+def list_dir_files(path):
+    all_files = os.listdir(path)
+    dirs = [f for f in all_files if os.path.isdir(os.path.join(path, f))]
+    files = [f for f in all_files if os.path.isfile(os.path.join(path, f))]
+    return dirs, files, all_files
 
-#task 3
-path = input('Insert path \n')
-path_bool = os.access(path, os.F_OK)
-if path_bool == False:
-    print("Path does not exist")
-elif path_bool == True:
-    print("Directories:", ', '.join([name for name in os.listdir(path) if os.path.isdir(os.path.join(path, name))]))
-    print("Files:", ', '.join([name for name in os.listdir(path) if not os.path.isdir(os.path.join(path, name))]))
-    
-#task 4
-with open(r'C:\demofile.txt', 'r') as file:
-    x = len(file.readlines())
-    print("Number of lines:", x)
+# Task 2: Check for access to a specified path.
+def check_access(path):
+    exists = os.path.exists(path)
+    readable = os.access(path, os.R_OK)
+    writable = os.access(path, os.W_OK)
+    executable = os.access(path, os.X_OK)
+    return exists, readable, writable, executable
 
-#task 5
-mylist = ['A', 'B', 'C', 'D']
-with open(r'C:\demofile2.txt', 'w') as file:
-    for i in mylist:
-        file.write(i + '\n')
-file.close()
+# Task 3: Test whether a given path exists or not.
+def test_path(path):
+    exists = os.path.exists(path)
+    if exists:
+        return os.path.basename(path), os.path.dirname(path)
+    else:
+        return None, None
 
-#task 6
-for char in ascii_uppercase:
-    file = open(r'C:\week6\{fchar}.txt'.format(fchar = char), 'x')
-    file.close()
+# Task 4: Count the number of lines in a text file.
+def count_lines(file_path):
+    with open(file_path, 'r') as file:
+        return sum(1 for _ in file)
 
-#task 7
-with open('demofile.txt', 'r') as file1, open('demofile3.txt', 'a') as file2:
-    for line in file1:
-        file2.write(line)
+# Task 5: Write a list to a file.
+def write_list_to_file(file_path, lst):
+    with open(file_path, 'w') as file:
+        file.writelines(f"{item}\n" for item in lst)
 
-#task 8
-path = r'C:\testfile2.txt'
-path_bool = os.access(path, os.F_OK)
-if path_bool == False:
-    print('Path does not exist')
-elif path_bool == True:
-    os.remove(path)
-    print("File has been removed")
+# Task 6: Generate 26 text files named A.txt, B.txt, and so on up to Z.txt
+def generate_text_files(directory):
+    for char in ascii_uppercase:
+        with open(os.path.join(directory, f"{char}.txt"), 'w') as file:
+            file.write(f"This is file {char}.txt\n")
+
+# Task 7: Copy the contents of a file to another file.
+def copy_file(src_path, dest_path):
+    with open(src_path, 'r') as src, open(dest_path, 'w') as dest:
+        dest.writelines(src.readlines())
+
+# Task 8: Delete file by specified path.
+def delete_file(path):
+    if os.path.exists(path) and os.access(path, os.W_OK):
+        os.remove(path)
+    else:
+        print("File does not exist or is not writable")
+
+
+
+print(list_dir_files('/path/to/directory'))
+print(check_access('/path/to/path'))
+print(test_path('/path/to/file.txt'))
+print(count_lines('/path/to/file.txt'))
+write_list_to_file('/path/to/file.txt', ['line1', 'line2', 'line3'])
+generate_text_files('/path/to/directory')
+copy_file('/path/to/source.txt', '/path/to/destination.txt')
+delete_file('/path/to/file.txt')
+
