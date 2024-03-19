@@ -15,13 +15,13 @@ while running:
             running = False
     keys = pygame.key.get_pressed()
     if keys[pygame.K_UP]:
-        ball_pos[1] -= ball_move
+        ball_pos[1] = max(ball_radius, ball_pos[1] - ball_move)
     if keys[pygame.K_DOWN]:
-        ball_pos[1] += ball_move
+        ball_pos[1] = min(screen_height - ball_radius, ball_pos[1] + ball_move)
     if keys[pygame.K_LEFT]:
-        ball_pos[0] -= ball_move
+        ball_pos[0] = max(ball_radius, ball_pos[0] - ball_move)
     if keys[pygame.K_RIGHT]:
-        ball_pos[0] += ball_move
+        ball_pos[0] = min(screen_width - ball_radius, ball_pos[0] + ball_move)
     screen.fill((255, 255, 255))
     pygame.draw.circle(screen, ball_color, ball_pos, ball_radius)
     pygame.display.flip()
