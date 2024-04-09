@@ -1,71 +1,56 @@
 import pygame
 import random
-
 pygame.init()
-
 W, H = 1200, 800
 FPS = 60
-
 screen = pygame.display.set_mode((W, H), pygame.RESIZABLE)
 clock = pygame.time.Clock()
 done = False
 bg = (0, 0, 0)
 
-# Paddle settings
-paddleW = 150
+paddleW = 300
 paddleH = 25
 paddleSpeed = 20
 paddle = pygame.Rect(W // 2 - paddleW // 2, H - paddleH - 30, paddleW, paddleH)
 
-# Ball settings
+
 ballRadius = 20
 ballSpeed = 6
 ball_rect = int(ballRadius * 2 ** 0.5)
 ball = pygame.Rect(random.randrange(ball_rect, W - ball_rect), H // 2, ball_rect, ball_rect)
 dx, dy = 1, -1
 
-# Score settings
+
 game_score = 0
 game_score_fonts = pygame.font.SysFont('comicsansms', 40)
 game_score_text = game_score_fonts.render(f'Your game score is: {game_score}', True, (255, 255, 255))
 game_score_rect = game_score_text.get_rect()
 game_score_rect.center = (210, 20)
 
-# Sound settings
+
 collision_sound = pygame.mixer.Sound('catch.mp3')
-def show_settings_menu():
-    settings_done = False
-    global ballSpeed, paddleW
-    while not settings_done:
+def show_pause_menu():
+    pause_done = False
+    while not pause_done:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return True  # Выход из игры
+                return True
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_c:  # Вернуться к игре
-                    settings_done = True
+                if event.key == pygame.K_c:  # Продолжить игру
+                    pause_done = True
                 elif event.key == pygame.K_q:  # Выход из игры
                     return True
-                elif event.key == pygame.K_s:  # Увеличить скорость мяча
-                    ballSpeed += 10
-                elif event.key == pygame.K_d:  # Уменьшить скорость мяча
-                    ballSpeed = max(1, ballSpeed - 10)
-                elif event.key == pygame.K_w:  # Увеличить ширину ракетки
-                    paddleW = min(200, paddleW + 10)
-                elif event.key == pygame.K_x:  # Уменьшить ширину ракетки
-                    paddleW = max(50, paddleW - 10)
         
-        # Обновляем ракетку с новыми настройками
-        paddle.width = paddleW
-
-        screen.fill((0, 0, 0))  # Темный экран для меню настроек
-        settings_text = game_score_fonts.render('Settings: S=Speed+, D=Speed-, W=Width+, X=Width-', True, (255, 255, 255))
-        settings_rect = settings_text.get_rect(center=(W / 2, H / 2))
-        screen.blit(settings_text, settings_rect)
+        # Экран меню паузы
+        screen.fill((0, 0, 0))  # Заливаем экран чёрным цветом для меню паузы
+        pause_text = game_score_fonts.render('Paused: C=Continue, Q=Quit', True, (255, 255, 255))
+        pause_rect = pause_text.get_rect(center=(W / 2, H / 2))
+        screen.blit(pause_text, pause_rect)
         pygame.display.flip()
         clock.tick(15)
-    return False  
+    return False
 
-
+        
 
 def detect_collision(dx, dy, ball, rect):
     if dx > 0:
@@ -119,7 +104,7 @@ wintextRect = wintext.get_rect()
 wintextRect.center = (W // 2, H // 2)
  
 start_time = pygame.time.get_ticks()
-time_interval = 20000
+time_interval = 10000
 
 while not done:
     for event in pygame.event.get():
@@ -127,7 +112,7 @@ while not done:
             done = True
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_p:
-                show_settings_menu()
+                show_pause_menu()
     current_time = pygame.time.get_ticks()
     if current_time - start_time > time_interval:  # Каждые time_interval миллисекунд
         ballSpeed += 1  # Увеличить скорость мяча

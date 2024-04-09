@@ -7,7 +7,7 @@ pygame.display.set_caption("Move the Ball")
 ball_color = (255, 0, 0)
 ball_radius = 25
 ball_pos = [screen_width // 2, screen_height // 2]
-ball_move = 20
+ball_move = 10
 running = True
 while running:
     for event in pygame.event.get():

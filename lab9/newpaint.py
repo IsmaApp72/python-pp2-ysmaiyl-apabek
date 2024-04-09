@@ -50,7 +50,7 @@ def draw_line(screen, start, end, width, color):
 def save_image(Surface, name):
     file = open('exist_check.txt', 'r')
     f = file.read()
-    pygame.image.save(Surface ,'/Users/bahauddin/Coding/pp2-22B030598/tsis9/paint/saved_images/' + name + str(int(f)) + '.png')
+    pygame.image.save(Surface , + name + str(int(f)) + '.png')
     file = open('exist_check.txt', 'w')
     file.write(str(int(f) + 1))
     file.close()

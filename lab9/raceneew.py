@@ -3,14 +3,11 @@ import sys
 import random
 from datetime import *
 
-# Initializing
 pygame.init()
-
-# Setting up FPS
 FPS = 60
 FramePerSec = pygame.time.Clock()
 
-# Creating colors
+
 BLUE = (0, 0, 255)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
@@ -70,9 +67,8 @@ class Player(pygame.sprite.Sprite):
 class Coin(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.weight = random.randint(1, 3)  # Вес монеты, который влияет на размер и очки
-        original_image = pygame.image.load("Coin.jpg")  # Загрузите базовое изображение монеты
-        # Масштабируем изображение в зависимости от веса монеты
+        self.weight = random.randint(1, 3)  
+        original_image = pygame.image.load("Coin.jpg")
         self.image = pygame.transform.scale(original_image, (20 * self.weight, 20 * self.weight))
         self.rect = self.image.get_rect()
         self.rect.center = (random.randint(40, SCREEN_WIDTH - 40), 0)
@@ -80,7 +76,7 @@ class Coin(pygame.sprite.Sprite):
     def move(self):
         self.rect.move_ip(0, SPEED)
         if self.rect.top > SCREEN_HEIGHT:
-            self.kill()  # Удаляем монету с экрана
+            self.kill()  
 
 
 # Creating Sprites Groups
